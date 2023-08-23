@@ -3,8 +3,23 @@ import styles from './ContactForm.module.css'
 import { MdMessage } from "react-icons/md";
 import {HiPhone} from "react-icons/hi";
 import {HiMail} from "react-icons/hi";
+import { useState } from 'react';
 
 const ContactForm = () => {
+
+  const [name, setName] = useState()
+  const [email, setEmail] = useState()
+  const [text, setText] = useState()
+
+  const onSubmit = (event) =>{
+    event.preventDefault();
+    setName(event.target[0].value)
+    setEmail(event.target[1].value)
+    setText(event.target[2].value)
+
+    // console.log({name,email,text})
+
+  }
   return (
     <section className={`${styles.container}`}>
         <div className={`${styles.contact_form}`}>
@@ -14,7 +29,7 @@ const ContactForm = () => {
             </div>
             <Button isOutline={true} text="VIA EMAIL FORM" icon={<HiMail fontSize="24px" />} />
 
-            <form>
+            <form onSubmit={onSubmit} >
              <div className={styles.form_controler}>
              <label htmlFor="name">Name</label>
               <input type="text" name='name' />
@@ -37,6 +52,9 @@ style={
 }>
              <Button text="SUMIT" />
 
+             </div>
+             <div>
+              {name + " " +  email + " " + text}
              </div>
             </form>
 
